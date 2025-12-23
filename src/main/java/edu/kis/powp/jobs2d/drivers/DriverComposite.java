@@ -4,10 +4,10 @@ import java.util.List;
 
 import edu.kis.powp.jobs2d.Job2dDriver;
 
-public class SimpleDriver implements Job2dDriver {
+public class DriverComposite implements Job2dDriver {
     private List<Job2dDriver> drivers;
 
-    public SimpleDriver(List<Job2dDriver> drivers) {
+    public DriverComposite(List<Job2dDriver> drivers) {
         this.drivers = drivers;
     }
 

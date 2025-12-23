@@ -12,7 +12,7 @@ import edu.kis.powp.appbase.Application;
 import edu.kis.powp.jobs2d.command.gui.CommandManagerWindow;
 import edu.kis.powp.jobs2d.command.gui.CommandManagerWindowCommandChangeObserver;
 import edu.kis.powp.jobs2d.drivers.LoggerDriver;
-import edu.kis.powp.jobs2d.drivers.SimpleDriver;
+import edu.kis.powp.jobs2d.drivers.DriverComposite;
 import edu.kis.powp.jobs2d.drivers.adapter.LineDriverAdapter;
 import edu.kis.powp.jobs2d.events.SelectLoadSecretCommandOptionListener;
 import edu.kis.powp.jobs2d.events.SelectRunCurrentCommandOptionListener;
@@ -69,10 +69,10 @@ public class TestJobs2dApp {
         Job2dDriver specialLineDriver = new LineDriverAdapter(drawerController, LineFactory.getSpecialLine(), "special");
         DriverFeature.addDriver("Special line Simulator", specialLineDriver);
 
-        Job2dDriver basicLineWithLoggerDriver = new SimpleDriver(List.of(basicLineDriver, loggerDriver));
+        Job2dDriver basicLineWithLoggerDriver = new DriverComposite(List.of(basicLineDriver, loggerDriver));
         DriverFeature.addDriver("Logger + Basic line", basicLineWithLoggerDriver);
 
-        Job2dDriver specialLineWithLoggerDriver = new SimpleDriver(List.of(specialLineDriver, loggerDriver));
+        Job2dDriver specialLineWithLoggerDriver = new DriverComposite(List.of(specialLineDriver, loggerDriver));
         DriverFeature.addDriver("Logger + Special line", specialLineWithLoggerDriver);
 
         DriverFeature.updateDriverInfo();
