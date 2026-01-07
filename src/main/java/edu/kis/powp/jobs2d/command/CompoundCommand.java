@@ -75,6 +75,16 @@ public class CompoundCommand implements ICompoundCommand {
             return this;
         }
 
+        public Builder addSetPosition(int x, int y) {
+            this.commands.add(new SetPositionCommand(x, y));
+            return this;
+        }
+
+        public Builder addOperateTo(int x, int y) {
+            this.commands.add(new OperateToCommand(x, y));
+            return this;
+        }
+
         //Builds the CompoundCommand instance.
         public CompoundCommand build() {
             return new CompoundCommand(commands);
