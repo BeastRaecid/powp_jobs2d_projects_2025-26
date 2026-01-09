@@ -32,6 +32,6 @@ public class SelectLoadSecretCommandOptionListener implements ActionListener {
         commands.add(new OperateToCommand(20, 50));
 
         CommandManager manager = CommandsFeature.getDriverCommandManager();
-        manager.setCurrentCommand(commands, "TopSecretCommand");
+        manager.setCurrentCommand(commands);
     }
 }
