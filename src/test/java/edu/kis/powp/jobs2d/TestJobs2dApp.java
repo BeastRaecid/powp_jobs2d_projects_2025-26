@@ -22,7 +22,6 @@ import edu.kis.powp.jobs2d.features.DriverFeature;
 
 public class TestJobs2dApp {
     private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-    private static AnimatedDriver animatedDriver;
 
     /**
      * Setup test concerning preset figures in context.
@@ -69,8 +68,17 @@ public class TestJobs2dApp {
         DriverFeature.addDriver("Basic line Simulator", basicLineDriver);
         DriverFeature.getDriverManager().setCurrentDriver(basicLineDriver);
 
-        animatedDriver = new AnimatedDriver(basicLineDriver);
-        DriverFeature.addDriver("Animated Line", animatedDriver);
+        AnimatedDriver slowAnimatedDriver = new AnimatedDriver(basicLineDriver);
+        slowAnimatedDriver.setSpeedSlow();
+        DriverFeature.addDriver("Animated Line - slow", slowAnimatedDriver);
+
+        AnimatedDriver mediumAnimatedDriver = new AnimatedDriver(basicLineDriver);
+        mediumAnimatedDriver.setSpeedMedium();
+        DriverFeature.addDriver("Animated Line - medium speed", mediumAnimatedDriver);
+
+        AnimatedDriver fastAnimatedDriver = new AnimatedDriver(basicLineDriver);
+        fastAnimatedDriver.setSpeedFast();
+        DriverFeature.addDriver("Animated Line - fast", fastAnimatedDriver);
 
         Job2dDriver specialLineDriver = new LineDriverAdapter(drawerController, LineFactory.getSpecialLine(), "special");
         DriverFeature.addDriver("Special line Simulator", specialLineDriver);
@@ -114,22 +122,6 @@ public class TestJobs2dApp {
     }
 
     /**
-     * Setup menu for animation control.
-     *
-     * @param application Application context.
-     */
-    private static void setupAnimation(Application application) {
-        application.addComponentMenu(AnimatedDriver.class, "Animation Driver Speed", 0);
-
-        application.addComponentMenuElement(AnimatedDriver.class, "Fast",
-                (ActionEvent e) -> animatedDriver.setSpeedFast());
-        application.addComponentMenuElement(AnimatedDriver.class, "Medium",
-                (ActionEvent e) -> animatedDriver.setSpeedMedium());
-        application.addComponentMenuElement(AnimatedDriver.class, "Slow",
-                (ActionEvent e) -> animatedDriver.setSpeedSlow());
-    }
-
-    /**
      * Launch the application.
      */
     public static void main(String[] args) {
@@ -145,7 +137,6 @@ public class TestJobs2dApp {
                 setupCommandTests(app);
                 setupLogger(app);
                 setupWindows(app);
-                setupAnimation(app);
 
                 app.setVisibility(true);
             }
